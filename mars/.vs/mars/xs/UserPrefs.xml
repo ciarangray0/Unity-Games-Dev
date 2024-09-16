@@ -1,19 +1,12 @@
 ﻿<Properties StartupConfiguration="{FAA81441-4673-E443-77B1-ACAC429D0C1B}|">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="a325cecb-cdc7-4526-ab6f-6a2b6b424230" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/GameManagerScript.cs">
     <Files>
-      <File FileName="Assets/GameManagerScript.cs" Line="13" Column="1" />
+      <File FileName="Assets/GameManagerScript.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="mars" expanded="True">
+          <Node name="mars">
             <Node name="Assets" expanded="True">
               <Node name="GameManagerScript.cs" selected="True" />
             </Node>
@@ -22,4 +15,11 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="36386021-739f-4efb-af9f-a9e78e8e41c8" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
