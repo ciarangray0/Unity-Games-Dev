@@ -10,30 +10,29 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Camera.main.transform.position = new Vector3(0f, 0f, -150f);
-        Camera.main.transform.LookAt(mars.transform);
+        Camera.main.transform.position = new Vector3(0f, 0f, -150f); //setting camera's position
+        Camera.main.transform.LookAt(mars.transform); //setting camera to look at mars
 
-        mars.GetComponent<Rigidbody>().AddTorque(new Vector3(0f, 10f, 0f));
+        mars.GetComponent<Rigidbody>().AddTorque(new Vector3(0f, 10f, 0f)); //giving mars it's own rotation
     }
 
     // Update is called once per frame
     void Update()
     {
-        phobos.transform.RotateAround(mars.transform.position, new Vector3(0f, 1f, 0f), 10*Time.deltaTime);
-        deimos.transform.RotateAround(mars.transform.position, new Vector3(0f, 1f, 0f), 10*Time.deltaTime);
+        phobos.transform.RotateAround(mars.transform.position, new Vector3(0f, 1f, 0f), 10 * Time.deltaTime); //making the two moons rotate around mars's x-axis
+        deimos.transform.RotateAround(mars.transform.position, new Vector3(0f, 1f, 0f), 10 * Time.deltaTime);
 
-        //Camera.main.transform.LookAt(mars.transform);
 
-        if (Input.GetKey(KeyCode.LeftArrow)) 
-        Camera.main.transform.RotateAround(mars.transform.position, new Vector3(0f, 1f, 0f), 10*Time.deltaTime);
+        if (Input.GetKey(KeyCode.LeftArrow)) //the type of arrow key pressed determines which way the camera will move
+        Camera.main.transform.RotateAround(mars.transform.position, Camera.main.transform.up, 10 * Time.deltaTime);  //the camera is rotating to the right around mars relative to its own y-axis
 
-        else if (Input.GetKey(KeyCode.RightArrow))
-        Camera.main.transform.RotateAround(mars.transform.position, new Vector3(0f, -1f, 0f), 10*Time.deltaTime);
+        if (Input.GetKey(KeyCode.RightArrow))
+        Camera.main.transform.RotateAround(mars.transform.position, -Camera.main.transform.up, 10 * Time.deltaTime); //the camera is rotating to the left around mars relative to its own y-axis
 
-        else if (Input.GetKey(KeyCode.UpArrow))
-        Camera.main.transform.RotateAround(mars.transform.position, new Vector3(1f, 0f, 0f), 10 * Time.deltaTime);
+        if (Input.GetKey(KeyCode.UpArrow))
+        Camera.main.transform.RotateAround(mars.transform.position, Camera.main.transform.right, 10 * Time.deltaTime); //the camera is rotating up around mars relative to its own x-axis
 
-        else if (Input.GetKey(KeyCode.DownArrow))
-        Camera.main.transform.RotateAround(mars.transform.position, new Vector3(-1f, 0f, 0f), 10 * Time.deltaTime);
+        if (Input.GetKey(KeyCode.DownArrow))
+        Camera.main.transform.RotateAround(mars.transform.position, -Camera.main.transform.right, 10 * Time.deltaTime); //the camera is rotating down around mars relative to its own x-axis
     }
 }
