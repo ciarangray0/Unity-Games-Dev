@@ -4,35 +4,35 @@ using UnityEngine;
 
 public class AsteroidScript : MonoBehaviour
 {
-    public GameObject asteroid;
     public GameObject mars;
     List<GameObject> activeAsteroids = new List<GameObject>();
+    List<GameObject> deadAsteroids = new List<GameObject>();
+    int ranX;
+    int ranY;
+    int ranZ;
+
     void Start()
     {
-        //SpawnAsteroid();
-    }
-
-    void Update()
-    {
+        //ranX = Random.Range(-100, -250);
+        //ranY = Random.Range(-250, 250);
+        //this.gameObject.transform.position = new Vector3(ranX, ranY, mars.transform.position.z);
+        this.gameObject.transform.position = new Vector3(-200, 200, mars.transform.position.z);
+        //this.gameObject.GetComponent<Rigidbody>().AddForce((mars.transform.position - this.gameObject.transform.position).normalized * 60, ForceMode.Impulse);
+        this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.right * 40, ForceMode.Impulse);
     
-        int chances = Random.Range(1, 500);
-        if(chances >= 495) {
-            SpawnAsteroid();
+    }
+    void Update() {
+        Vector3 screenPosition = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
+        if (screenPosition.x > Screen.width + 300 || screenPosition.x < -300 || screenPosition.y > Screen.height + 300 || screenPosition.y < -300) {
+            GameObject.Destroy(this.gameObject);
         }
     }
-    void SpawnAsteroid(){
-        GameObject newAsteroid = Instantiate(asteroid);
-        asteroid.transform.position = new Vector3(mars.transform.position.x - 200f, mars.transform.position.y, mars.transform.position.z);
-        asteroid.GetComponent<Rigidbody>().AddForce((mars.transform.position - asteroid.transform.position.normalized) * 60, ForceMode.Impulse);
-        activeAsteroids.Add(newAsteroid);
-    }
 
-        void OnTriggerEnter(Collider collider) {
-            //if(activeAsteroids.Contains(collider.gameObject)) {
-                //activeAsteroids.Remove(collider.gameObject);
-                //GameObject.Destroy(collider.gameObject);
-           // }
-           GameObject.Destroy(this.asteroid);
+    void OnTriggerEnter(Collider collider) {
+            if(collider.gameObject.CompareTag("mars")) {
+            GameObject.Destroy(this.gameObject);
+            }
         }
 }
+
 

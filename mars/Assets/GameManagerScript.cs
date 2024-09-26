@@ -7,16 +7,18 @@ public class GameManagerScript : MonoBehaviour
     public GameObject mars;
     public GameObject deimos;
     public GameObject phobos;
-    // Start is called before the first frame update
+    public GameObject asteroid;
+
     void Start()
     {
         Camera.main.transform.position = new Vector3(0f, 0f, -150f); //setting camera's position
         Camera.main.transform.LookAt(mars.transform); //setting camera to look at mars
 
         mars.GetComponent<Rigidbody>().AddTorque(new Vector3(0f, 10f, 0f)); //giving mars it's own rotation
+
+        StartCoroutine(SpawnAsteroidsCoroutine());
     }
 
-    // Update is called once per frame
     void Update()
     {
         phobos.transform.RotateAround(mars.transform.position, new Vector3(0f, 1f, 0f), 10 * Time.deltaTime); //making the two moons rotate around mars's x-axis
@@ -34,5 +36,13 @@ public class GameManagerScript : MonoBehaviour
 
         if (Input.GetKey(KeyCode.DownArrow))
         Camera.main.transform.RotateAround(mars.transform.position, -Camera.main.transform.right, 10 * Time.deltaTime); //the camera is rotating down around mars relative to its own x-axis
+    }
+    IEnumerator SpawnAsteroidsCoroutine()
+    {
+        while (true)
+    {
+        GameObject newAsteroid = GameObject.Instantiate(asteroid);
+        yield return new WaitForSeconds(3f);
+    }
     }
 }
