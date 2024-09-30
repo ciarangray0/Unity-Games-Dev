@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour
 {
+    //gameObject references
     public GameObject mars;
     public GameObject deimos;
     public GameObject phobos;
@@ -16,7 +17,7 @@ public class GameManagerScript : MonoBehaviour
 
         mars.GetComponent<Rigidbody>().AddTorque(new Vector3(0f, 10f, 0f)); //giving mars it's own rotation
 
-        StartCoroutine(SpawnAsteroidsCoroutine());
+        StartCoroutine(SpawnAsteroidsCoroutine()); //a coroutine to spawn the asteroids at a fixed rate, every few seconds
     }
 
     void Update()
@@ -37,12 +38,12 @@ public class GameManagerScript : MonoBehaviour
         if (Input.GetKey(KeyCode.DownArrow))
         Camera.main.transform.RotateAround(mars.transform.position, -Camera.main.transform.right, 10 * Time.deltaTime); //the camera is rotating down around mars relative to its own x-axis
     }
-    IEnumerator SpawnAsteroidsCoroutine()
-    {
+    IEnumerator SpawnAsteroidsCoroutine() //coroutine to instansiate the asteroids at a fixed rate 
+    { //as my gameManager script is attached to mars, phobos and deimos, it spawns 3 asteroids every 3 seconds, but i left it like this as it flows well in the game
         while (true)
     {
-        GameObject newAsteroid = GameObject.Instantiate(asteroid);
-        yield return new WaitForSeconds(3f);
+        GameObject newAsteroid = GameObject.Instantiate(asteroid); //instansiate a new asteroid
+        yield return new WaitForSeconds(3f); //wait 3 seconds 
     }
     }
 }

@@ -318,6 +318,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: deimos
       objectReference: {fileID: 0}
+    - target: {fileID: 474245857029531064, guid: 519c8392cfe9249b0a0c17b1d45fef5f, type: 3}
+      propertyPath: m_TagString
+      value: deimos
+      objectReference: {fileID: 0}
+    - target: {fileID: 474245857029765528, guid: 519c8392cfe9249b0a0c17b1d45fef5f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 474245857029765528, guid: 519c8392cfe9249b0a0c17b1d45fef5f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 474245857029765528, guid: 519c8392cfe9249b0a0c17b1d45fef5f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 474245857029765528, guid: 519c8392cfe9249b0a0c17b1d45fef5f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 100
@@ -609,6 +625,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8158671706834769029, guid: 18b7cfdb18fd74b40a6a893bf804f7a4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158671706834769029, guid: 18b7cfdb18fd74b40a6a893bf804f7a4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158671706834769029, guid: 18b7cfdb18fd74b40a6a893bf804f7a4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158671706834769029, guid: 18b7cfdb18fd74b40a6a893bf804f7a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 75
       objectReference: {fileID: 0}
@@ -652,6 +680,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: phobos
       objectReference: {fileID: 0}
+    - target: {fileID: 8158671706834929829, guid: 18b7cfdb18fd74b40a6a893bf804f7a4, type: 3}
+      propertyPath: m_TagString
+      value: phobos
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -673,6 +705,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4275034300049396807, guid: 5ddc5511134c34d378761f4685003d37, type: 3}
       propertyPath: m_Name
+      value: asteroid
+      objectReference: {fileID: 0}
+    - target: {fileID: 4275034300049396807, guid: 5ddc5511134c34d378761f4685003d37, type: 3}
+      propertyPath: m_TagString
       value: asteroid
       objectReference: {fileID: 0}
     - target: {fileID: 8910131885767837192, guid: 5ddc5511134c34d378761f4685003d37, type: 3}
@@ -715,7 +751,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3071044986373356938, guid: 5ddc5511134c34d378761f4685003d37, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
