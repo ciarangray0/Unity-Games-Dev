@@ -20,7 +20,7 @@ public class GameManagerScript : MonoBehaviour
         StartCoroutine(SpawnAsteroidsCoroutine()); //a coroutine to spawn the asteroids at a fixed rate, every few seconds
     }
 
-    void Update()
+    void FixedUpdate()
     {
         phobos.transform.RotateAround(mars.transform.position, new Vector3(0f, 1f, 0f), 10 * Time.deltaTime); //making the two moons rotate around mars's x-axis
         deimos.transform.RotateAround(mars.transform.position, new Vector3(0f, 1f, 0f), 10 * Time.deltaTime);

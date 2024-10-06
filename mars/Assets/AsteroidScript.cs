@@ -30,9 +30,11 @@ public class AsteroidScript : MonoBehaviour
         }
         //give the asteroid it's force, its direction(via the direction vector), and ForceMode.Impulse to give the asteroid it's force instantly so it doesn't need to accelerate
         this.gameObject.GetComponent<Rigidbody>().AddForce(directionVector * 60, ForceMode.Impulse); 
+
+        StartCoroutine(CheckOffScreenCoroutine());
     
     }
-    void Update() {
+    void FixedUpdate() {
         //first convert the asteroid's world cooridinates to 2D "screen coordinates"
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
         //determine if the asteroids have gone off screen- they have some extra room so they're not destroyed the second they appear offscreen
