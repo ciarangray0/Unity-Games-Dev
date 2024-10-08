@@ -9,74 +9,81 @@ public class Asteroid : MonoBehaviour
     {
         Vector3 screenPosition3D1 = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 30)); // bottom-left
         Vector3 screenPosition3D2 = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, 30)); // bottom-right
-Vector3 screenPosition3D3 = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 30)); // top-left
-Vector3 screenPosition3D4 = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 30)); // top-right
-Debug.Log("Bottom left " + screenPosition3D1);
-Debug.Log("top right " + screenPosition3D4);
+        Vector3 screenPosition3D3 = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 30)); // top-left
+        Vector3 screenPosition3D4 = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 30)); // top-right
+        Debug.Log("Bottom left " + screenPosition3D1); //print coordinates to console for debugging
+        Debug.Log("top right " + screenPosition3D4);
 
-// Generate small offsets from the screen edges
-float ranOffsetX = Random.Range(1, 10);  // Minor offset on X
-float ranOffsetZ = Random.Range(1, 10);  // Minor offset on Z
+//generate small offsets from the screen edges
+float ranOffsetX = Random.Range(1, 10); 
+float ranOffsetZ = Random.Range(1, 10);  
 
-int randomPosition = Random.Range(1, 5); // Fixed range to include 4
+int randomPosition = Random.Range(1, 5); //randonly deside which corner the asteroids will come from
 Debug.Log("Random position index: " + randomPosition);
 
-// Adjust asteroid position based on random edge
+//give astseroids their positions roughly in any corner off the screen with some offset
 if(randomPosition == 1) {
-    // Bottom-left corner
+    //bottom-left corner
     this.gameObject.transform.position = screenPosition3D1 + new Vector3(ranOffsetX, 0, ranOffsetZ);
 }
 else if(randomPosition == 2) {
-    // Bottom-right corner
+    //bottom-right corner
     this.gameObject.transform.position = screenPosition3D2 + new Vector3(-ranOffsetX, 0, ranOffsetZ);
 }
 else if(randomPosition == 3) {
-    // Top-left corner
+    //top-left corner
     this.gameObject.transform.position = screenPosition3D3 + new Vector3(ranOffsetX, 0, -ranOffsetZ);
 }
 else if(randomPosition == 4) {
-    // Top-right corner
+    //top-right corner
     this.gameObject.transform.position = screenPosition3D4 + new Vector3(-ranOffsetX, 0, -ranOffsetZ);
 }
 
-// Debug the asteroid position
+//print asteroid posiion for debugging
 Debug.Log("Asteroid Position: " + this.gameObject.transform.position);
-
-Vector3 randomDirectionVector = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
-
-this.gameObject.GetComponent<Rigidbody>().AddForce(randomDirectionVector * 5, ForceMode.Impulse);
-   
+//make a random direction vector to give the asteroids a direction to travel
+Vector3 randomDirectionVector = new Vector3(Random.Range(-10f, 10f), 0, Random.Range(-10f, 10f));
+//give the asteroid force
+this.gameObject.GetComponent<Rigidbody>().AddForce(randomDirectionVector, ForceMode.Impulse);
+StartCoroutine(CheckOutOfBounds());
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+ 
+    }
+    IEnumerator CheckOutOfBounds() {
+        while(true) {
+            yield return new WaitForSeconds(0.2f); //runs 5 times a second
+        //get the asteroid coordinates in screen coordinates
         Vector3 asteroidScreenPosition = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
 
-        // Check if the asteroid is off-screen and reposition it accordingly
+        //check if the asteroid is off-screen and wrap it around to the other side of screen
         if (asteroidScreenPosition.x > Screen.width) {
-            asteroidScreenPosition.x = Screen.width - asteroidScreenPosition.x;
+            asteroidScreenPosition.x = 0;
+            
         } 
         else if (asteroidScreenPosition.x < 0) {
             asteroidScreenPosition.x = Screen.width;
+           
         }
 
         if (asteroidScreenPosition.y > Screen.height) {
-            asteroidScreenPosition.y = Screen.height - asteroidScreenPosition.y;
-            //asteroidScreenPosition.y % Screen.height;
+           
+            asteroidScreenPosition.y = 0;
         } 
         else if (asteroidScreenPosition.y < 0) {
-            asteroidScreenPosition.y = Screen.height;
+            asteroidScreenPosition.y =  Screen.height;
+            
         }
 
         Debug.Log("2d " + this.gameObject.transform.position);
 
-        Vector3 velocityVector = this.gameObject.GetComponent<Rigidbody>().velocity;
-
-        // Convert back to world space and assign the new position
+        //convert back to world space and assign the asteroid's new position
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(asteroidScreenPosition);
         this.gameObject.transform.position = new Vector3(worldPosition.x, 0, worldPosition.z);
         Debug.Log("3d " + this.gameObject.transform.position);
-        this.gameObject.GetComponent<Rigidbody>().velocity = velocityVector;
+        }
     }
     }

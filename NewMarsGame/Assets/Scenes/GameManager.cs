@@ -8,11 +8,11 @@ public class GameManager : MonoBehaviour
     private int currentGameLevel;
     // Start is called before the first frame update
     void Start()
-    {
-      Camera.main.transform.position = new Vector3(0f, 27f, 0f);
-      Camera.main.transform.LookAt(new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 1f));
+    { //position camera
+      Camera.main.transform.position = new Vector3(0f, 30f, 0f);
+      Camera.main.transform.LookAt(new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 1f)); //point camera down
       currentGameLevel = 1;
-      startNextLevel();
+      startNextLevel(); //spawn new asteroids
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     private void startNextLevel() {
         for (int i = 0; i < (3 * currentGameLevel); i++) {
-        GameObject newAsteroid = GameObject.Instantiate(asteroid);
+        GameObject newAsteroid = GameObject.Instantiate(asteroid); //instansiate new asteroids
         }
     }
 }
