@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject asteroid;
+    public GameObject spaceship;
     private int currentGameLevel;
     // Start is called before the first frame update
     void Start()
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
       Camera.main.transform.position = new Vector3(0f, 30f, 0f);
       Camera.main.transform.LookAt(new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 1f)); //point camera down
       currentGameLevel = 1;
+      createPlayerSpaceship();
       startNextLevel(); //spawn new asteroids
     }
 
@@ -25,5 +27,9 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < (3 * currentGameLevel); i++) {
         GameObject newAsteroid = GameObject.Instantiate(asteroid); //instansiate new asteroids
         }
+    }
+    
+    private void createPlayerSpaceship() {
+      GameObject playerSpaceship = GameObject.Instantiate(spaceship);
     }
 }

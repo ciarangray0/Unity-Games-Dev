@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
+    public GameObject smallAsteroids;
     // Start is called before the first frame update
     void Start()
     {
@@ -85,5 +86,20 @@ StartCoroutine(CheckOutOfBounds());
         this.gameObject.transform.position = new Vector3(worldPosition.x, 0, worldPosition.z);
         Debug.Log("3d " + this.gameObject.transform.position);
         }
+    }
+    void OnTriggerEnter(Collider collider) {
+        if(collider != null) {
+            Debug.Log("collision at " + collider.transform.position);
+        for(int i = 0; i < 4; i++) {
+        GameObject newSmallAsteroids = GameObject.Instantiate(smallAsteroids);
+        newSmallAsteroids.transform.position = collider.transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 0f, Random.Range(-0.5f, 0.5f));
+            if (newSmallAsteroids.GetComponent<Rigidbody>() != null) {
+                // Give the small asteroid a random velocity
+                Vector3 randomVelocity = new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
+                newSmallAsteroids.GetComponent<Rigidbody>().velocity = randomVelocity; // Set the velocity
+            }
+        }
+       GameObject.Destroy(this.gameObject); 
+    }
     }
     }
