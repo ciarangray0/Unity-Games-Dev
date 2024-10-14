@@ -14,7 +14,7 @@ public class SmallAsteroid : MonoBehaviour
     {
     }
 
-    private IEnumerator ProcessLifetime() {
+    private IEnumerator ProcessLifetime() { //coroutine that will destroy the debris after 3 seconds
         yield return new WaitForSeconds(3f);
         GameObject.Destroy(this.gameObject);
     }

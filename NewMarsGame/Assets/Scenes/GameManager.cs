@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
       Camera.main.transform.position = new Vector3(0f, 30f, 0f);
       Camera.main.transform.LookAt(new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 1f)); //point camera down
       currentGameLevel = 1;
-      createPlayerSpaceship();
+      createPlayerSpaceship(); //spawn spaceship
       startNextLevel(); //spawn new asteroids
     }
 
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    private void createPlayerSpaceship() {
+    private void createPlayerSpaceship() { //create spaceship
       GameObject playerSpaceship = GameObject.Instantiate(spaceship);
     }
 }

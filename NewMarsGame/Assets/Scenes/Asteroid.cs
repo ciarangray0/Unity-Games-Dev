@@ -5,41 +5,31 @@ using UnityEngine;
 public class Asteroid : MonoBehaviour
 {
     public GameObject smallAsteroids;
+    public static Vector3 screenBottomLeft, screenTopRight; 
+    public static float screenWidth, screenHeight;
     // Start is called before the first frame update
     void Start()
-    {
-        Vector3 screenPosition3D1 = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 30)); // bottom-left
-        Vector3 screenPosition3D2 = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, 30)); // bottom-right
-        Vector3 screenPosition3D3 = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 30)); // top-left
-        Vector3 screenPosition3D4 = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 30)); // top-right
-        Debug.Log("Bottom left " + screenPosition3D1); //print coordinates to console for debugging
-        Debug.Log("top right " + screenPosition3D4);
-
-//generate small offsets from the screen edges
-float ranOffsetX = Random.Range(1, 10); 
-float ranOffsetZ = Random.Range(1, 10);  
-
-int randomPosition = Random.Range(1, 5); //randonly deside which corner the asteroids will come from
-Debug.Log("Random position index: " + randomPosition);
-
+    { //assigning values to my screen position variables
+        screenBottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0f,0f,30f)); 
+        screenTopRight = Camera.main.ViewportToWorldPoint (new Vector3(1f,1f,30f)); 
+        screenWidth = screenTopRight.x - screenBottomLeft.x;
+        screenHeight = screenTopRight.z - screenBottomLeft.z;
+        //x and z(y) coordinates for the asteroids
+float x, z;
 //give astseroids their positions roughly in any corner off the screen with some offset
-if(randomPosition == 1) {
-    //bottom-left corner
-    this.gameObject.transform.position = screenPosition3D1 + new Vector3(ranOffsetX, 0, ranOffsetZ);
+if(Random.Range (0f, 1f) < 0.5f) {
+   x = screenBottomLeft.x + Random.Range (0f, 0.15f) * screenWidth;
 }
-else if(randomPosition == 2) {
-    //bottom-right corner
-    this.gameObject.transform.position = screenPosition3D2 + new Vector3(-ranOffsetX, 0, ranOffsetZ);
+else {
+    x = screenTopRight.x - Random.Range (0f, 0.15f) * screenWidth;
 }
-else if(randomPosition == 3) {
-    //top-left corner
-    this.gameObject.transform.position = screenPosition3D3 + new Vector3(ranOffsetX, 0, -ranOffsetZ);
+if(Random.Range (0f, 1f) < 0.5f) {
+    z = screenBottomLeft.z + Random.Range (0f, 0.15f) * screenHeight;
 }
-else if(randomPosition == 4) {
-    //top-right corner
-    this.gameObject.transform.position = screenPosition3D4 + new Vector3(-ranOffsetX, 0, -ranOffsetZ);
+else{
+    z = screenTopRight.z - Random.Range (0f, 0.15f) * screenHeight;
 }
-
+this.gameObject.transform.position = new Vector3(x, 0f, z);
 //print asteroid posiion for debugging
 Debug.Log("Asteroid Position: " + this.gameObject.transform.position);
 //make a random direction vector to give the asteroids a direction to travel
@@ -71,7 +61,6 @@ StartCoroutine(CheckOutOfBounds());
         }
 
         if (asteroidScreenPosition.y > Screen.height) {
-           
             asteroidScreenPosition.y = 0;
         } 
         else if (asteroidScreenPosition.y < 0) {
@@ -88,18 +77,18 @@ StartCoroutine(CheckOutOfBounds());
         }
     }
     void OnTriggerEnter(Collider collider) {
-        if(collider != null) {
+        if(collider != null) { //first double check the asteroid has collided with something
             Debug.Log("collision at " + collider.transform.position);
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < 4; i++) { //spawn 4 pieces of debris
         GameObject newSmallAsteroids = GameObject.Instantiate(smallAsteroids);
-        newSmallAsteroids.transform.position = collider.transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 0f, Random.Range(-0.5f, 0.5f));
+        newSmallAsteroids.transform.position = collider.transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 0f, Random.Range(-0.5f, 0.5f)); //give the debris a position around the collision with some offset
             if (newSmallAsteroids.GetComponent<Rigidbody>() != null) {
-                // Give the small asteroid a random velocity
+                //give the debris a random velocity
                 Vector3 randomVelocity = new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
-                newSmallAsteroids.GetComponent<Rigidbody>().velocity = randomVelocity; // Set the velocity
+                newSmallAsteroids.GetComponent<Rigidbody>().velocity = randomVelocity; //set the velocity
             }
         }
-       GameObject.Destroy(this.gameObject); 
+       GameObject.Destroy(this.gameObject); //destroy the asteroid that had a collision
     }
     }
     }

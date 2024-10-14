@@ -7,7 +7,7 @@ public class Spaceship : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.gameObject.transform.position = new Vector3(0f, 0f, 0f);
+        this.gameObject.transform.position = new Vector3(0f, 0f, 0f); //position in middle of screen 
         StartCoroutine(CheckOutOfBounds());
     }
 
@@ -31,10 +31,10 @@ public class Spaceship : MonoBehaviour
     IEnumerator CheckOutOfBounds() {
         while(true) {
             yield return new WaitForSeconds(0.2f); //runs 5 times a second
-        //get the asteroid coordinates in screen coordinates
+        //get the spaceship coordinates in screen coordinates
         Vector3 spaceshipScreenPosition = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
 
-        //check if the asteroid is off-screen and wrap it around to the other side of screen
+        //check if the spaceship is off-screen and wrap it around to the other side of screen
         if (spaceshipScreenPosition.x > Screen.width) {
             spaceshipScreenPosition.x = 0;
             
@@ -55,7 +55,7 @@ public class Spaceship : MonoBehaviour
 
         Debug.Log("2d " + this.gameObject.transform.position);
 
-        //convert back to world space and assign the asteroid's new position
+        //convert back to world space and assign the spaceship's new position
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(spaceshipScreenPosition);
         this.gameObject.transform.position = new Vector3(worldPosition.x, 0, worldPosition.z);
         Debug.Log("3d " + this.gameObject.transform.position);

@@ -31,7 +31,7 @@ public class AsteroidScript : MonoBehaviour
         //give the asteroid it's force, its direction(via the direction vector), and ForceMode.Impulse to give the asteroid it's force instantly so it doesn't need to accelerate
         this.gameObject.GetComponent<Rigidbody>().AddForce(directionVector * 60, ForceMode.Impulse); 
 
-        StartCoroutine(CheckOffScreenCoroutine());
+        //StartCoroutine(CheckOffScreenCoroutine());
     
     }
     void FixedUpdate() {

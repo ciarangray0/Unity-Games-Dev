@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroid: {fileID: 7009834324292884771, guid: c152fe8191fcf424fb0becd353858377, type: 3}
-  spaceship: {fileID: 0}
+  spaceship: {fileID: 4045223327186621728, guid: 8f4d2cf3b516d453ea05c239f5ec8c7c, type: 3}
 --- !u!4 &1652956968
 Transform:
   m_ObjectHideFlags: 0
