@@ -5,6 +5,8 @@ using UnityEngine;
 public class Spaceship : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject bullet;
+    private bool canFire = true;
     void Start()
     {
         this.gameObject.transform.position = new Vector3(0f, 0f, 0f); //position in middle of screen 
@@ -21,11 +23,22 @@ public class Spaceship : MonoBehaviour
         this.gameObject.GetComponent<Rigidbody>().MoveRotation(this.gameObject.GetComponent<Rigidbody>().rotation * Quaternion.Euler(0f, 80f * Time.deltaTime, 0f));
 
         if (Input.GetKey(KeyCode.UpArrow))
-        this.gameObject.GetComponent<Rigidbody>().velocity = transform.forward * 10;
-
+        this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * (this.gameObject.GetComponent<Rigidbody>().mass * Time.fixedDeltaTime * 750f));
+        
         if (Input.GetKey(KeyCode.DownArrow))
-        this.gameObject.GetComponent<Rigidbody>().velocity = transform.forward * -10;
-    
+        this.gameObject.GetComponent<Rigidbody>().AddForce(-transform.forward * (this.gameObject.GetComponent<Rigidbody>().mass * Time.fixedDeltaTime * 750f));
+
+        if (Input.GetKey(KeyCode.Space) && canFire) {
+            StartCoroutine(FireBullet());
+            }
+
+    }
+    IEnumerator FireBullet() {
+        canFire=false;
+        GameObject newbullet = GameObject.Instantiate(bullet, this.gameObject.transform.position + this.gameObject.transform.forward, this.gameObject.transform.rotation);
+        newbullet.GetComponent<Rigidbody>().AddForce((transform.forward * 20), ForceMode.Impulse);
+        yield return new WaitForSeconds(0.25f);  //wait for fireRate before allowing next bullet
+        canFire = true;
     }
 
     IEnumerator CheckOutOfBounds() {

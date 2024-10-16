@@ -133,7 +133,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 25.463636
+  m_Radius: 25
   m_Center: {x: -1.0471029, y: 0.7916948, z: 3.7084875}
 --- !u!114 &-6947530409736805626
 MonoBehaviour:
@@ -148,3 +148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smallAsteroids: {fileID: 443324965745515708, guid: d92992a7260ad4913b39aa8eff9c2950, type: 3}
+  spaceship: {fileID: 4045223327186621728, guid: 8f4d2cf3b516d453ea05c239f5ec8c7c, type: 3}
+  asteroid: {fileID: 7009834324292884771}
+  bigAsteroid: 1
