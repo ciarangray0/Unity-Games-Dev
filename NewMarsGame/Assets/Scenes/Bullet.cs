@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(CheckOutOfBounds());
+        StartCoroutine(CheckOutOfBounds()); //coroutine to check if bullet is offscreen
     }
 
     // Update is called once per frame
@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
 
         //check if the asteroid is off-screen and wrap it around to the other side of screen
         if (bulletScreenPosition.x > Screen.width || bulletScreenPosition.x < 0 || bulletScreenPosition.y > Screen.height || bulletScreenPosition.y < 0) {
-            GameObject.Destroy(this.gameObject);
+            GameObject.Destroy(this.gameObject); //destroy the bullet if it goes offscreen
         } 
         }
     }

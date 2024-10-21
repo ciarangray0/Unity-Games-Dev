@@ -28,17 +28,17 @@ public class Spaceship : MonoBehaviour
         if (Input.GetKey(KeyCode.DownArrow))
         this.gameObject.GetComponent<Rigidbody>().AddForce(-transform.forward * (this.gameObject.GetComponent<Rigidbody>().mass * Time.fixedDeltaTime * 750f));
 
-        if (Input.GetKey(KeyCode.Space) && canFire) {
-            StartCoroutine(FireBullet());
+        if (Input.GetKey(KeyCode.Space) && canFire) { //canFire boolean controls the firing rate so 1 bullet can be fired every 0.25 seconds
+            StartCoroutine(FireBullet());  //coroutine handles the bullet firing 
             }
 
     }
     IEnumerator FireBullet() {
-        canFire=false;
-        GameObject newbullet = GameObject.Instantiate(bullet, this.gameObject.transform.position + this.gameObject.transform.forward, this.gameObject.transform.rotation);
-        newbullet.GetComponent<Rigidbody>().AddForce((transform.forward * 20), ForceMode.Impulse);
-        yield return new WaitForSeconds(0.25f);  //wait for fireRate before allowing next bullet
-        canFire = true;
+        canFire=false; //disables new bullets from firing until set to true
+        GameObject newbullet = GameObject.Instantiate(bullet, this.gameObject.transform.position + this.gameObject.transform.forward, this.gameObject.transform.rotation); //instansiate bullet's position to the front of the spaceship, and give it the spaceship's rotation so it fires straight
+        newbullet.GetComponent<Rigidbody>().AddForce((transform.forward * 20), ForceMode.Impulse); //give the bullet force
+        yield return new WaitForSeconds(0.25f);  //wait 0.25 seconds for fireRate to be set to true before allowing next bullet
+        canFire = true; 
     }
 
     IEnumerator CheckOutOfBounds() {
