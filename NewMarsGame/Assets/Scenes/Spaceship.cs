@@ -46,7 +46,6 @@ public class Spaceship : MonoBehaviour
             yield return new WaitForSeconds(0.2f); //runs 5 times a second
         //get the spaceship coordinates in screen coordinates
         Vector3 spaceshipScreenPosition = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
-~
         //check if the spaceship is off-screen and wrap it around to the other side of screen
         if (spaceshipScreenPosition.x > Screen.width) {
             spaceshipScreenPosition.x = 0;

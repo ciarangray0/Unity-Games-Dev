@@ -1,18 +1,72 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+  public enum gameState { Menu, Playing};
+  public gameState currentState = gameState.Menu;
     public GameObject asteroid;
     public GameObject spaceship;
     private int currentGameLevel;
     public static Vector3 screenBottomLeft, screenTopRight; 
     public static float screenWidth, screenHeight;
+    private static GameManager instance;
     // Start is called before the first frame update
-    void Start()
-    { 
-      //assigning values to my screen position variables
+        void Start() {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        
+    }
+
+    public void onStartGameButtonClick() {
+      changeScene(gameState.Playing);
+      Debug.Log("Button clicked!");
+    }
+
+    private void changeScene(gameState newGameState) {
+      currentState = newGameState;
+      switch(newGameState) {
+        case gameState.Menu :
+        Debug.Log("switching to menu");
+        SceneManager.LoadScene("MenuScene");
+        break;
+
+        case gameState.Playing :
+        Debug.Log("switching to game");
+        SceneManager.LoadScene("GameScene");
+        SceneManager.sceneLoaded += OnSceneLoaded; // Attach the event for scene load
+        break;
+      }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "GameScene" && currentState == gameState.Playing)
+        {
+          Debug.Log("calling startGame()");
+          startGame();
+          Debug.Log("GameScene loaded, calling startGame()");
+        }
+        SceneManager.sceneLoaded -= OnSceneLoaded; // Detach event to prevent duplicate calls
+    }
+
+    private void startGame() {
+        //assigning values to my screen position variables
         screenBottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0f,0f,30f)); 
         screenTopRight = Camera.main.ViewportToWorldPoint (new Vector3(1f,1f,30f)); 
         screenWidth = screenTopRight.x - screenBottomLeft.x;
@@ -24,12 +78,6 @@ public class GameManager : MonoBehaviour
       createPlayerSpaceship(); //spawn spaceship
       startNextLevel(); //spawn new asteroids
 
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        
     }
 
     private void startNextLevel() {
