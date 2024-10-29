@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: asteroid1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3d283d4e2cc1f423cbc2e9e351772618, type: 3}
+      propertyPath: m_TagString
+      value: asteroid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -151,3 +155,4 @@ MonoBehaviour:
   spaceship: {fileID: 4045223327186621728, guid: 8f4d2cf3b516d453ea05c239f5ec8c7c, type: 3}
   asteroid: {fileID: 7009834324292884771}
   bigAsteroid: 1
+  spaceshipCanCollide: 1

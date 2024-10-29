@@ -380,7 +380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652956968}
-  - component: {fileID: 1652956967}
+  - component: {fileID: 1652956969}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -388,21 +388,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1652956967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1652956966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa968c0b7c7bc47d28129579268b8c1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 1
-  asteroid: {fileID: 7009834324292884771, guid: c152fe8191fcf424fb0becd353858377, type: 3}
-  spaceship: {fileID: 4045223327186621728, guid: 8f4d2cf3b516d453ea05c239f5ec8c7c, type: 3}
 --- !u!4 &1652956968
 Transform:
   m_ObjectHideFlags: 0
@@ -418,6 +403,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1652956969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652956966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa968c0b7c7bc47d28129579268b8c1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  asteroid: {fileID: 7009834324292884771, guid: c152fe8191fcf424fb0becd353858377, type: 3}
+  spaceship: {fileID: 4045223327186621728, guid: 8f4d2cf3b516d453ea05c239f5ec8c7c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
