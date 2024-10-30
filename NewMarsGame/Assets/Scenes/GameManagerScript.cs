@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -16,6 +18,12 @@ public class GameManagerScript : MonoBehaviour
     public static AsteroidScript asteroidscript;
     private int playerLives;
     private int score;
+    private static int highScore = 0;
+    public TMP_Text PlayerLives;
+    public TMP_Text HighScore;
+    public TMP_Text MenuHighScore;
+    public TMP_Text Score;
+    private bool brokeHighScore;
     // Start is called before the first frame update
         void Start() {
         if (instance == null)
@@ -35,6 +43,15 @@ public class GameManagerScript : MonoBehaviour
     void FixedUpdate()
     {
         
+    }
+
+    public void updateScore (int newScore) {
+      score += newScore;
+      if(score > highScore) {
+        highScore = score;
+        brokeHighScore = true;
+      }
+      UpdateDisplay();
     }
 
     IEnumerator CheckForEndOfLevel() {
@@ -71,19 +88,48 @@ public class GameManagerScript : MonoBehaviour
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+{
+    // If the "GameScene" is loaded and game state is Playing, start the game
+    if (scene.name == "GameScene" && currentState == gameState.Playing)
     {
-        if (scene.name == "GameScene" && currentState == gameState.Playing)
-        {
-          Debug.Log("calling startGame()");
-          startGame();
-          Debug.Log("GameScene loaded, calling startGame()");
-        }
-        SceneManager.sceneLoaded -= OnSceneLoaded; // Detach event to prevent duplicate calls
+        Debug.Log("calling startGame()");
+        startGame();
+        Debug.Log("GameScene loaded, calling startGame()");
+    }
+    // If the "MenuScene" is loaded, display the high score
+    else if (scene.name == "MenuScene" && currentState == gameState.Menu)
+    {
+        MenuHighScore = GameObject.Find("MenuHighScore").GetComponent<TMP_Text>();
+        MenuHighScore.SetText("HighScore: " + highScore);
+        Debug.Log("MenuScene loaded, displaying high score");
+    }
+
+    // Detach event to prevent duplicate calls
+    SceneManager.sceneLoaded -= OnSceneLoaded;
+}
+
+
+        private void UpdateDisplay() {
+          if(PlayerLives != null) {
+        PlayerLives.SetText("Lives: " + playerLives);
+          }
+          if(HighScore != null) {
+        HighScore.SetText("HighScore: " + highScore);
+          }
+        if(Score != null) {
+        Score.SetText("Score: " + score);
+          }
     }
 
     private void startGame() {
+      PlayerLives = GameObject.Find("PlayerLives").GetComponent<TMP_Text>();
+      Score = GameObject.Find("Score").GetComponent<TMP_Text>();
+      HighScore = GameObject.Find("HighScore").GetComponent<TMP_Text>();
       playerLives = 3;
       currentGameLevel = 0;
+      score = 0;
+      brokeHighScore = false;
+      UpdateDisplay();
         //assigning values to my screen position variables
         screenBottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0f,0f,30f)); 
         screenTopRight = Camera.main.ViewportToWorldPoint (new Vector3(1f,1f,30f)); 
@@ -127,7 +173,6 @@ public class GameManagerScript : MonoBehaviour
     foreach (Rigidbody rb in GameObject.FindObjectsOfType<Rigidbody>()) {
         Destroy(rb.gameObject);
     }
-
     StopAllCoroutines();
 }
 
@@ -137,6 +182,7 @@ public class GameManagerScript : MonoBehaviour
         gameOver();
       }
       else {
+        UpdateDisplay();
       createPlayerSpaceship();
       }
     }

@@ -89,6 +89,7 @@ public class AsteroidScript : MonoBehaviour
             if(collider.gameObject.CompareTag("spaceship") && spaceshipCanCollide) { //if ollided with a spaceship and collision cooldown is off
                 //destroy and respawn the spaceship
                 GameObject.Destroy(collider.gameObject);
+                gms.updateScore(-10);                
                 gms.spaceshipDestroyed();
                 StartCoroutine(SpaceshipCollisionCooldown());
             }
@@ -104,10 +105,12 @@ public class AsteroidScript : MonoBehaviour
                         newAsteroid.transform.position = collider.transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 0f, Random.Range(-0.5f, 0.5f)); //put a small offset on their positions
                         newAsteroid.GetComponent<AsteroidScript>().bigAsteroid = false; //no longer will be treated as a big asteroid
                     }
+                    gms.updateScore(5);
                     spawnDebris();
                 }
                 if(!this.bigAsteroid) { //case for smaller asteroids collision, (note: i am not treating the debris as smaller asteroids, the debris cannot collide with anything)
                         //in this case, the asteroid is simply destroyed and debris are spawned
+                        gms.updateScore(10);
                         spawnDebris();
                 }
                 GameObject.Destroy(this.gameObject); //destroy the collided asteroid in both cases

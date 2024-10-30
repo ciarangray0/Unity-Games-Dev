@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 306648861}
   - component: {fileID: 306648860}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -856,6 +856,7 @@ MonoBehaviour:
   currentState: 0
   asteroid: {fileID: 7009834324292884771, guid: c152fe8191fcf424fb0becd353858377, type: 3}
   spaceship: {fileID: 4045223327186621728, guid: 8f4d2cf3b516d453ea05c239f5ec8c7c, type: 3}
+  PlayerLives: {fileID: 2135989515}
 --- !u!1 &2135989513
 GameObject:
   m_ObjectHideFlags: 0
