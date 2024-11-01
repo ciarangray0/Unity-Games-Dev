@@ -88,8 +88,7 @@ public class AsteroidScript : MonoBehaviour
             Debug.Log("collision at " + collider.transform.position);
             if(collider.gameObject.CompareTag("spaceship") && spaceshipCanCollide) { //if ollided with a spaceship and collision cooldown is off
                 //destroy and respawn the spaceship
-                GameObject.Destroy(collider.gameObject);
-                gms.updateScore(-10);                
+                GameObject.Destroy(collider.gameObject);               
                 gms.spaceshipDestroyed();
                 StartCoroutine(SpaceshipCollisionCooldown());
             }

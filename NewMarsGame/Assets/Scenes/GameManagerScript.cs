@@ -77,6 +77,7 @@ public class GameManagerScript : MonoBehaviour
         case gameState.Menu :
         Debug.Log("switching to menu");
         SceneManager.LoadScene("MenuScene");
+        SceneManager.sceneLoaded += OnSceneLoaded;
         break;
 
         case gameState.Playing :
@@ -99,8 +100,21 @@ public class GameManagerScript : MonoBehaviour
     // If the "MenuScene" is loaded, display the high score
     else if (scene.name == "MenuScene" && currentState == gameState.Menu)
     {
-        MenuHighScore = GameObject.Find("MenuHighScore").GetComponent<TMP_Text>();
+       Button startButton = GameObject.Find("Button").GetComponent<Button>();
+        if (startButton != null)
+        {
+            startButton.onClick.AddListener(onStartGameButtonClick);
+            Debug.Log("StartButton's OnClick listener added.");
+        }
+        else
+        {
+            Debug.LogError("StartButton not found in MenuScene.");
+        }
+      MenuHighScore = GameObject.Find("MenuHighScore").GetComponent<TMP_Text>();
+      if (MenuHighScore != null) {
         MenuHighScore.SetText("HighScore: " + highScore);
+        }
+
         Debug.Log("MenuScene loaded, displaying high score");
     }
 
